@@ -18,6 +18,9 @@ class TimeStampedModel(models.Model):
 class Question(TimeStampedModel):
     title = models.CharField(default='empty', max_length=100)
     detail_text = models.CharField(max_length=500)
+    answers = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
+    bounty = models.FloatField(default=0)
 
     def __str__(self):              # __unicode__ on Python 2
         return self.title

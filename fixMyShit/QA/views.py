@@ -40,5 +40,5 @@ def ask_question(request):
     else:
         form = AskQuestionForm()
 
-    return render(request, 'QA/ask_question.html', {'form': form})
+    return render(request, 'QA/askQuestion.html', {'form': form})
 

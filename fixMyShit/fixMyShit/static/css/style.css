@@ -1,7 +1,73 @@
 
 #wrapper
 {
-    margin-left: auto;
-    margin-right: auto;
-    width:50%;
+    margin:0px auto;
+    width:1000px;
+}
+
+#questionTab
+{
+    width: 1000px;
+    float: left;
+    overflow: hidden;
+    background-color: cadetblue;
+    padding: 12px 0px;
+    display: block;
+    overflow:hidden;
+}
+
+
+#qInfo
+{
+    width:130px;
+    margin:0px;
+    padding:0px;
+    border:0px;
+    float:left;
+    vertical-align: top;
+}
+#qTitle
+{
+    float: left;
+    width: 520px;
+    padding: 0px;
+    display: inline-block;
+    border: solid grey;
+    vertical-align: top;
+}
+
+.bounty
+{
+    width:40px;
+    height:30px;
+    margin:0px;
+    padding: 15px 0px 0px 0px;
+    text-align:center;
+    display: inline-block;
+    font-size: 11px;
+
+}
+
+.answers
+{
+    width:40px;
+    height:30px;
+    margin:0px;
+    padding: 15px 0px 0px 0px;
+    text-align:center;
+    display: inline-block;
+    font-size: 11px;
+
+}
+
+.views
+{
+    width:40px;
+    height:30px;
+    margin:0px;
+    padding: 15px 0px 0px 0px;
+    text-align:center;
+    display: inline-block;
+    font-size: 11px;
+
 }

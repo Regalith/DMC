@@ -10,17 +10,51 @@
         <h1>Fix My Shit</h1>
         <div>
             {% if latest_question_list %}
-                <ul>
+
                 {% for question in latest_question_list %}
-                    <li><a href="{% url 'QA:question' question.id %}">{{ question.title}}</a></li>
+
+                    <div id="questionTab">
+
+                        <div id="qInfo">
+                            <div class="bounty">
+                                <div>
+                                    {{question.bounty|floatformat:2 }}
+                                </div>
+                                <div>
+                                    Bounty
+                                </div>
+                            </div>
+                            <div class="answers">
+                                <div>
+                                    {{question.answers}}
+                                </div>
+                                <div>
+                                    Answers
+                                </div>
+                            </div>
+                            <div class="views">
+                                <div>
+                                    {{question.views}}
+                                </div>
+                                <div>
+                                    Views
+                                </div>
+                            </div>
+                        </div>
+                        <div id="qTitle">
+                            <a href="{% url 'QA:question' question.id %}">{{ question.title}}</a>
+                        </div>
+                    </div>
+
                 {% endfor %}
-                </ul>
+
             {% else %}
                 <p>No Questions are available.</p>
             {% endif %}
 
-            <a href="{% url 'QA:ask_question' %}">Ask a Question</a>
         </div>
+        <a href="{% url 'QA:ask_question' %}">Ask a Question</a>
+
     </div>
 </body>
 </html>

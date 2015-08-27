@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    {% load staticfiles %}
+     <link rel="stylesheet" type="text/css" href="./static/css/askQuestion.css" />
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1> Ask a Question </h1>
+    <div id="wrapper">
+        <form action="{% url 'QA:ask_question' %}" method="post">
+            {% csrf_token %}
+            <ul>
+                <input type="text" name="title" id="title" value="Enter question here" />
+                <br>
+                <input type="text" name="detail_text" id="detail_text" value="Enter details here" />
+            </ul>
+            <input type="submit" value="Ask" />
+        </form>
+    </div>
+</body>
+</html>
