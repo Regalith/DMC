@@ -21,6 +21,7 @@ class Question(TimeStampedModel):
     answers = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
     bounty = models.FloatField(default=0)
+    isAnswered = models.BooleanField(default=0)
 
     def __str__(self):              # __unicode__ on Python 2
         return self.title

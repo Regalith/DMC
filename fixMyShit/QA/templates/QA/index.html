@@ -2,12 +2,37 @@
 <html>
 <head lang="en">
     <link rel="stylesheet" type="text/css" href="./static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./static/css/navBar.css" />
     <meta charset="UTF-8">
     <title>Fix My Shit</title>
 </head>
 <body>
+    <div class="navBar">
+        <div id="navBarTop" class="navBar">
+            <div class="barContainer">
+                <img src="./static/img/logoTitle.png" alt="Logo" id="logo" height="62" width="300" style="float:left;">
+
+                <a class="barLink topLink" href="{% url 'QA:ask_question' %}">Login</a>
+                <a class="barLink topLink" href="{% url 'QA:ask_question' %}">Sign Up</a>
+            </div>
+        </div>
+        <div id="navBarBottom" class="navBar">
+            <div class="barContainer">
+                <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Ask a Question</a>
+                <div id="linkContainer">
+                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Help</a>
+                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Legal</a>
+                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Forum</a>
+                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">FAQ</a>
+                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">How it Works </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div id="wrapper">
-        <h1>Fix My Shit</h1>
+
         <div>
             {% if latest_question_list %}
 
@@ -16,27 +41,49 @@
                     <div id="questionTab">
 
                         <div id="qInfo">
-                            <div class="bounty">
-                                <div>
-                                    {{question.bounty|floatformat:2 }}
+                            {% if question.bounty > 0 %}
+                                <div class="infoSquare bountyGreen">
+                                    <div class="topInfo">
+                                        {{question.bounty|floatformat:2 }}
+                                    </div>
+                                    <div class="bottomInfo">
+                                        Bounty
+                                    </div>
                                 </div>
-                                <div>
-                                    Bounty
+                            {% else %}
+                                <div class="infoSquare">
+                                    <div class="topInfo">
+                                        {{question.bounty|floatformat:2 }}
+                                    </div>
+                                    <div class="bottomInfo">
+                                        Bounty
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="answers">
-                                <div>
-                                    {{question.answers}}
+                            {% endif%}
+                            {% if question.isAnswered %}
+                                <div class="infoSquare answersBlue">
+                                    <div class="topInfo">
+                                        {{question.answers}}
+                                    </div>
+                                    <div class="bottomInfo">
+                                        Answers
+                                    </div>
                                 </div>
-                                <div>
-                                    Answers
+                            {% else %}
+                                <div class="infoSquare">
+                                    <div class="topInfo">
+                                        {{question.answers}}
+                                    </div>
+                                    <div class="bottomInfo">
+                                        Answers
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="views">
-                                <div>
+                            {% endif %}
+                            <div class="infoSquare">
+                                <div class="topInfo">
                                     {{question.views}}
                                 </div>
-                                <div>
+                                <div class="bottomInfo">
                                     Views
                                 </div>
                             </div>
@@ -53,7 +100,7 @@
             {% endif %}
 
         </div>
-        <a href="{% url 'QA:ask_question' %}">Ask a Question</a>
+
 
     </div>
 </body>

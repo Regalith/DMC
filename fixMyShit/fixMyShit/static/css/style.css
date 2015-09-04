@@ -1,8 +1,24 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+  font-family: 'montserratBold';
+  src: url('../fonts/montserratBlack.otf');
+}
+@font-face {
+  font-family: 'montserrat';
+  src: url('../fonts/montserratRegular.otf');
+}
+
 
 #wrapper
 {
     margin:0px auto;
     width:1000px;
+    padding: 100px 0px 0px 0px;
+    font-family: montserrat;
 }
 
 #questionTab
@@ -10,17 +26,17 @@
     width: 1000px;
     float: left;
     overflow: hidden;
-    background-color: cadetblue;
-    padding: 12px 0px;
+    padding: 15px 0px;
     display: block;
     overflow:hidden;
+    border-bottom:1px solid #e0e0e0;
 }
 
 
 #qInfo
 {
-    width:130px;
-    margin:0px;
+
+    margin:0px 20px 0px 0px;
     padding:0px;
     border:0px;
     float:left;
@@ -32,42 +48,55 @@
     width: 520px;
     padding: 0px;
     display: inline-block;
-    border: solid grey;
     vertical-align: top;
 }
 
-.bounty
+#qTitle a
 {
-    width:40px;
-    height:30px;
+    text-decoration: none;
+    color:#4174b9;
+}
+
+#qTitle a:hover
+{
+    color:#5a9df8;
+}
+
+.infoSquare
+{
+    width:70px;
+    height:70px;
     margin:0px;
-    padding: 15px 0px 0px 0px;
+    padding: 0px;
     text-align:center;
     display: inline-block;
     font-size: 11px;
-
+    vertical-align: top;
 }
 
-.answers
+.bountyGreen
 {
-    width:40px;
-    height:30px;
-    margin:0px;
-    padding: 15px 0px 0px 0px;
-    text-align:center;
-    display: inline-block;
-    font-size: 11px;
 
+    background-color: #246914;
+    color: #ffffff;
 }
 
-.views
+.answersBlue
 {
-    width:40px;
-    height:30px;
-    margin:0px;
-    padding: 15px 0px 0px 0px;
-    text-align:center;
-    display: inline-block;
-    font-size: 11px;
+
+    background:#4174b9;
+    color: #ffffff;
 
 }
+
+.topInfo
+{
+    padding-top: 15px;
+    font-size: 20px;
+}
+.bottomInfo
+{
+
+}
+
+

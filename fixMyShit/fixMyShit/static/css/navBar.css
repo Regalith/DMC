@@ -1,0 +1,70 @@
+
+
+.navBar
+{
+    width:100%;
+    min-width: 1600px;
+    padding: 0px;
+    margin :0px;
+}
+
+#navBarTop
+{
+    background:#242424;
+    height:80px;
+}
+
+#navBarBottom
+{
+    background:#4174b9;
+    height:40px;
+}
+
+.barContainer
+{
+    width:1600px;
+    margin:0px auto;
+    font-family: montserratBold;
+    color:#bfbfbf;
+    font-size: 20px;
+}
+#logo
+{
+    padding-top: 10px
+}
+
+.barLink
+{
+    float:right;
+    color:#bfbfbf;
+    text-decoration: none;
+
+}
+
+.topLink
+{
+    font-size:20px;
+    padding: 25px 10px 25px 10px;
+}
+
+.bottomLink
+{
+    color: #181818;
+    padding: 5px 10px 10px 10px;
+}
+.topLink:hover{
+    background: #181818; /* make this whatever you want */
+    color:#ffffff;
+}
+
+.bottomLink:hover{
+    background: #254571;
+    color:#ffffff;
+
+}
+
+#linkContainer
+{
+    float:right;
+    padding-right: 600px;
+}
