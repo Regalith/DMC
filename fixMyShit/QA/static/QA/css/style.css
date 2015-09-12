@@ -16,14 +16,24 @@ body {
 #wrapper
 {
     margin:0px auto;
-    width:1000px;
+    width:1600px;
     padding: 100px 0px 0px 0px;
     font-family: montserrat;
 }
 
+
+
+#questions
+{
+    float:left;
+    width:800px;
+    margin-top: -15px;
+    margin-left: 20px;
+}
+
 #questionTab
 {
-    width: 1000px;
+    width: 800px;
     float: left;
     overflow: hidden;
     padding: 15px 0px;
@@ -99,4 +109,8 @@ body {
 
 }
 
-
+.pagination
+{
+    float:left;
+    height:200px;
+}

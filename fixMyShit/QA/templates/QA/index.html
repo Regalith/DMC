@@ -1,16 +1,64 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head lang="en">
-    <link rel="stylesheet" type="text/css" href="./static/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="./static/css/navBar.css" />
+    <link rel="stylesheet" type="text/css" href="{% static "QA/css/style.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "QA/css/navBar.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "QA/css/filters.css" %}" />
+
     <meta charset="UTF-8">
     <title>Fix My Shit</title>
+
+    <datalist id="languageOptions">
+        {% if languages %}
+
+            {% for language in languages %}
+                 <option value="{{language.title}}">
+            {% endfor %}
+        {% endif %}
+    </datalist>
+    <datalist id="programOptions">
+        {% if programs %}
+
+            {% for program in programs %}
+                 <option value="{{program.title}}">
+            {% endfor %}
+        {% endif %}
+    </datalist>
+    <datalist id="frameworkOptions">
+        {% if frameworks %}
+
+            {% for framework in frameworks %}
+                 <option value="{{framework.title}}">
+            {% endfor %}
+        {% endif %}
+    </datalist>
+    <datalist id="answeredOptions">
+        <option value="Yes">
+        <option value="No">
+        <option value="Both">
+    </option>
+    </datalist>
+
+    <script>
+        function turnOnFilter(id)
+        {
+            var e = document.getElementById(id);
+            if(e.style.display == 'block')
+                e.style.display = 'none';
+            else
+                e.style.display = 'block';
+
+        }
+    </script>
 </head>
 <body>
+
+    {% block navBar %}
     <div class="navBar">
         <div id="navBarTop" class="navBar">
             <div class="barContainer">
-                <img src="./static/img/logoTitle.png" alt="Logo" id="logo" height="62" width="300" style="float:left;">
+                <img src="{% static "QA/img/logoTitle.png" %}"alt="Logo" id="logo" height="62" width="300" style="float:left;">
 
                 <a class="barLink topLink" href="{% url 'QA:ask_question' %}">Login</a>
                 <a class="barLink topLink" href="{% url 'QA:ask_question' %}">Sign Up</a>
@@ -20,20 +68,62 @@
             <div class="barContainer">
                 <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Ask a Question</a>
                 <div id="linkContainer">
-                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Help</a>
                     <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Legal</a>
-                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Forum</a>
                     <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">FAQ</a>
-                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">How it Works </a>
+                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Forum</a>
+                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">How it Works</a>
+                    <a class="barLink bottomLink" href="{% url 'QA:index' %}">Home </a>
                 </div>
 
             </div>
         </div>
     </div>
-
+    {% endblock navBar %}
+    {% block content %}
     <div id="wrapper">
+        <div id="filters">
+            <div id="filterContainer">
 
-        <div>
+                <h3 style="padding: 0px auto; margin: 0px;"> Filter Results</h3>
+
+                <form action="{% url 'QA:index' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="filter">
+                        <input type="checkbox" class="checkBox" onClick="turnOnFilter('language');">
+                        <p class="filterTitle">Language</p>
+                        <input type="text" class="filterBox" name="language" id="language" list="languageOptions" placeholder="e.g. C++">
+                    </div>
+
+                    <div class="filter">
+                        <input type="checkbox"  class="checkBox" onClick="turnOnFilter('program');">
+                        <p class="filterTitle">Program</p>
+                        <input type="text" class="filterBox" name="program" id="program" list="programOptions" placeholder="e.g. Unity">
+                    </div>
+
+                    <div class="filter">
+                        <input type="checkbox"  class="checkBox" onClick="turnOnFilter('framework');">
+                        <p class="filterTitle">Framework</p>
+                        <input type="text" class="filterBox" name="framework" id="framework" list="frameworkOptions" placeholder="e.g. Django">
+                    </div>
+
+                    <div class="filter">
+                        <input type="checkbox"  class="checkBox" onClick="turnOnFilter('bounty');">
+                        <p class="filterTitle">Minimum Bounty</p>
+                        <input type="text" class="filterBox" name="bounty" id= "bounty" placeholder="$0.00">
+                    </div>
+
+                    <div class="filter">
+                        <input type="checkbox"  class="checkBox" onClick="turnOnFilter('answered');">
+                        <p class="filterTitle">Answered</p>
+                        <input type="text" class="filterBox" name="answered" id="answered" list="answeredOptions">
+                    </div>
+
+                    <input type="submit" value="Filter" />
+                </form>
+            </div>
+        </div>
+        <div id="questions">
             {% if latest_question_list %}
 
                 {% for question in latest_question_list %}
@@ -94,6 +184,27 @@
                     </div>
 
                 {% endfor %}
+            {% if is_paginated %}
+                <div class="pagination">
+                    <span class="page-links">
+                        {% if page_obj.has_previous %}
+                             <a href="/?page={{ page_obj.previous_page_number }}">previous</a>
+                        {% endif %}
+                        <span class="page-current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                             <a href="/?page={{ page_obj.next_page_number }}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+
+        </div>
+
+
+
+
 
             {% else %}
                 <p>No Questions are available.</p>
@@ -103,5 +214,6 @@
 
 
     </div>
+    {% endblock content %}
 </body>
 </html>

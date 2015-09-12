@@ -1,11 +1,27 @@
 <!DOCTYPE html>
+{% extends "QA/index.html" %}
+{% load staticfiles %}
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-{{ question.title }}<br>
-{{ question.detail_text }}
-</body>
+    <head lang="en">
+        <link rel="stylesheet" type="text/css" href="../static/css/askQuestion.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/navBar.css" />
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+
+        {% block navBar %}
+            {{ block.super}}
+        {% endblock navBar %}
+
+        {% block content %}
+
+            <div id="wrapper">
+                {{ question.title }}<br>
+                {{ question.detail_text }}
+            </div>
+
+        {% endblock content %}
+    </body>
 </html>

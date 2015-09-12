@@ -1,26 +1,26 @@
 <!DOCTYPE html>
+{% extends "QA/index.html" %}
+{% load staticfiles %}
 <html>
     <head lang="en">
         {% load staticfiles %}
         <link rel="stylesheet" type="text/css" href="./static/css/askQuestion.css" />
         <link rel="stylesheet" type="text/css" href="./static/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="./static/css/navBar.css" />
         <meta charset="UTF-8">
-        <title></title>
+        <title>Ask a Question</title>
     </head>
     <body>
-        <div class="navBar">
-            <div id="navBarTop" class="navBar">
-                <div id="barContainer">
-                    <img src="./static/img/logoTitle.png" alt="Logo" height="62" width="300" style="float:left;">
-                </div>
-            </div>
-            <div id="navBarBottom" class="navBar">
 
-            </div>
-        </div>
+        {% block navBar %}
+            {{ block.super}}
+        {% endblock navBar %}
+
+        {% block content %}
 
         <div id="wrapper">
-                    <h1> Ask a Question </h1>
+
+            <h1> Ask a Question </h1>
 
             <form action="{% url 'QA:ask_question' %}" method="post">
                 {% csrf_token %}
@@ -32,5 +32,7 @@
                 <input type="submit" value="Ask" />
             </form>
         </div>
+
+        {% endblock content %}
     </body>
 </html>
