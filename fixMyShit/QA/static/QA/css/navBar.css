@@ -3,7 +3,7 @@
 .navBar
 {
     width:100%;
-    min-width: 1600px;
+    min-width: 1080px;
     padding: 0px;
     margin :0px;
 }
@@ -22,7 +22,7 @@
 
 .barContainer
 {
-    width:1600px;
+    width:1000px;
     margin:0px auto;
     font-family: montserratBold;
     color:#bfbfbf;
@@ -47,16 +47,16 @@
     padding: 25px 10px 25px 10px;
 }
 
-.bottomLink
-{
-    color: #181818;
-    padding: 5px 10px 10px 10px;
-}
 .topLink:hover{
     background: #181818; /* make this whatever you want */
     color:#ffffff;
 }
-
+.bottomLink
+{
+    color: #181818;
+    padding: 8px 10px 10px 10px;
+    font-size: 16px;
+}
 .bottomLink:hover{
     background: #254571;
     color:#ffffff;
@@ -66,6 +66,6 @@
 #linkContainer
 {
     float:right;
-    padding-right: 600px;
+    padding-right: 200px;
     font-family: montserrat;
 }
