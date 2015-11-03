@@ -155,24 +155,6 @@ def detail(request, question_id):
     question.save()
     return render(request, 'QA/question.html', {'question': question})
 
-def index(request):
-    question_list = Question.objects.order_by('-modified')[:15]
-    paginator = Paginator(question_list, 25) # Show 25 contacts per page
-
-    page = request.GET.get('page')
-
-    try:
-        latest_question_list = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        latest_question_list = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        latest_question_list = paginator.page(paginator.num_pages)
-
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'QA/index.html', context)
-
 
 def ask_question(request):
     if request.method == 'POST':

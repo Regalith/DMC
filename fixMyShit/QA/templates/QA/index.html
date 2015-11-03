@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "QA/css/style.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "QA/css/navBar.css" %}" />
     <link rel="stylesheet" type="text/css" href="{% static "QA/css/filters.css" %}" />
-
+    <link rel="stylesheet" type="text/css" href="{% static "QA/css/dropDownMenu.css" %}" />
     <meta charset="UTF-8">
     <title>Fix My Shit</title>
 
@@ -58,6 +58,23 @@
     <div class="navBar">
         <div id="navBarTop" class="navBar">
             <div class="barContainer">
+                <nav id="nav">
+                    <ul id="dropDownMenu">
+                        <li><a href="#" class="first" > <img id="dropDownIcon" src="{% static "QA/img/menu.png" %}"></a>
+                            <ul>
+                                <li><a href="{% url 'QA:index' %}">Home</a></li>
+                                <li><a href="#">How It Works</a></li>
+                                <li><a href="#">Forum</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                                <li><a href="#" class="last">FAQ</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </nav>
+
+
                 <img src="{% static "QA/img/logoTitle.png" %}"alt="Logo" id="logo" height="62" width="300" style="float:left;">
 
                 <a class="barLink topLink" href="{% url 'QA:ask_question' %}">Login</a>
@@ -65,17 +82,6 @@
             </div>
         </div>
         <div id="navBarBottom" class="navBar">
-            <div class="barContainer">
-                <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Ask a Question</a>
-                <div id="linkContainer">
-                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Legal</a>
-                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">FAQ</a>
-                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">Forum</a>
-                    <a class="barLink bottomLink" href="{% url 'QA:ask_question' %}">How it Works</a>
-                    <a class="barLink bottomLink" href="{% url 'QA:index' %}">Home </a>
-                </div>
-
-            </div>
         </div>
     </div>
     {% endblock navBar %}
