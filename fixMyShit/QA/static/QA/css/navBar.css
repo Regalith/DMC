@@ -17,7 +17,7 @@
 #navBarBottom
 {
     background:#4174b9;
-    height:5px;
+    height:3px;
 }
 
 .barContainer
@@ -51,17 +51,7 @@
     background: #181818; /* make this whatever you want */
     color:#ffffff;
 }
-.bottomLink
-{
-    color: #181818;
-    padding: 8px 10px 10px 10px;
-    font-size: 16px;
-}
-.bottomLink:hover{
-    background: #254571;
-    color:#ffffff;
 
-}
 
 #linkContainer
 {
