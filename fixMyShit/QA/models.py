@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 # Create your models here.
 
 
@@ -30,7 +30,7 @@ class TimeStampedModel(models.Model):
     ``created`` and ``modified`` fields.
     """
     created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(default=datetime.now())
+    modified = models.DateTimeField(default=timezone.now)
 
     class Meta:
         abstract = True
@@ -48,8 +48,7 @@ class Question(TimeStampedModel):
     program = models.ForeignKey(Program, blank=True, null=True, related_name='program')
     framework = models.ForeignKey(Framework, blank=True, null=True, related_name='framework')
 
-
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):
         return self.title
 
 
@@ -58,7 +57,7 @@ class Answer(TimeStampedModel):
     answer_text = models.CharField(max_length=200)
     selected_answer = models.BooleanField(default=0)
 
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):
         return self.choiceText
 
 
