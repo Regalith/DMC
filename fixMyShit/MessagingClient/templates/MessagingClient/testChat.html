@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<ul>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
 
-</ul>
-</body>
+    {% if chat_list %}</pre>
+        <ul>
+        <ul>{% for chat in chat_list %}</ul>
+        </ul>
+        <ul>
+        <ul>
+            <li><a id="" href="{% url 'chat_room' chat.id %}"> {{ chat.name }}</a></li>
+        </ul>
+        </ul>
+        <ul>{% endfor %}</ul>
+        <pre>
+
+
+
+        {% else %}
+
+          No chats are available.
+
+    {% endif %}
+    </pre>
 </html>
