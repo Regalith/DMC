@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('QA.urls', namespace='QA')),
-    url(r'message/', include('MessagingClient.urls', namescape='Message')),
+    url(r'message/', include('MessagingClient.urls', namespace='Message')),
     url(r'^admin/', include(admin.site.urls)),
 ]

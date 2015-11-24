@@ -1,5 +1,5 @@
 from django.db import models
-from User.models import DMCUser
+from User.models import UserProfile
 from django.utils import timezone
 
 # Create your models here.
@@ -7,8 +7,8 @@ from django.utils import timezone
 
 class Chat(models.Model):
 
-    owner = models.ForeignKey(DMCUser, related_name='Owner')
-    member = models.ForeignKey(DMCUser, related_name='Member')
+    owner = models.ForeignKey(UserProfile, related_name='Owner')
+    member = models.ForeignKey(UserProfile, related_name='Member')
     started = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
