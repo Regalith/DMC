@@ -6,11 +6,11 @@ from django.contrib.auth.models import User
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-
+        fields = ('picture',)
 
 class UserForm(forms.ModelForm):
 
-    password = forms.CharField(widgets=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
         model = User

@@ -19,5 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include('QA.urls', namespace='QA')),
     url(r'message/', include('MessagingClient.urls', namespace='Message')),
+    url(r'account/', include ('UserProfile.urls',namespace='UserProfile')),
     url(r'^admin/', include(admin.site.urls)),
 ]

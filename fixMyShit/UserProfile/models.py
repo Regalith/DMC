@@ -11,5 +11,7 @@ class UserProfile(models.Model):
     posts = models.IntegerField(default=0)
     answeredQuestions = models.IntegerField(default=0)
 
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
     def __str__(self):
         return self.user;
