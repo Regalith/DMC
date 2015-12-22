@@ -1,13 +1,14 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var TestComponent = require('./components/test1.jsx');
+var NavBarComponent = require('./components/navBar/navBarBase.jsx');
+var QuestionListComponent = require('./components/questionList/questionListBase.jsx');
 
 var BaseComponent = React.createClass({
     render: function(){
         return (
             <div>
-                <TestComponent />
-                Does it?
+                <NavBarComponent />
+                <QuestionListComponent url="/QA/api/getAllQuestions"/>
             </div>
          )
     }
