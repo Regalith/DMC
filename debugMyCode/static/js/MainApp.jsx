@@ -1,17 +1,20 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var NavBarComponent = require('./components/navBar/navBarBase.jsx');
-var QuestionListComponent = require('./components/questionList/questionListBase.jsx');
+var QuestionPageComponent = require('./components/questions/questionsPage.jsx');
+var QuestionDetailsComponent = require('./components/questions/questionDetails/questionDetails.jsx');
+var Router = require('react-router').Router;
+var Route = require('react-router').Route;
+var IndexRoute = require('react-router').IndexRoute;
+var createBrowserHistory = require('history/lib/createBrowserHistory');
 
-var BaseComponent = React.createClass({
-    render: function(){
-        return (
-            <div>
-                <NavBarComponent />
-                <QuestionListComponent url="/QA/api/getAllQuestions"/>
-            </div>
-         )
-    }
-});
+var history = createBrowserHistory();
 
-ReactDOM.render(<BaseComponent />, document.getElementById('content'));
+ReactDOM.render((
+  <Router history={history}>
+    <Route path="/" component={NavBarComponent}>
+        <IndexRoute component={QuestionPageComponent}/>
+        <Route path='/question/:id' component={QuestionDetailsComponent}/>
+    </Route>
+  </Router>
+), document.getElementById('content'));

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, Http404
 from .models import Question, Language, Framework, Program
 from .serializers import QuestionSerializer
 from rest_framework import generics
@@ -7,14 +7,13 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework import permissions
 from .permissions import IsOwnerOrReadOnly
-import logging
-
+from rest_framework.permissions import AllowAny
+import sys
 
 class AllQuestionsView(generics.ListAPIView):
     queryset = Question.objects.all().order_by('-modified')
     serializer_class = QuestionSerializer
-
-    logger = logging.getLogger(__name__)
+    permission_classes = (AllowAny,)
 
     language = None
     program = None
@@ -66,10 +65,19 @@ class AllQuestionsView(generics.ListAPIView):
         return queryset
 
 
-class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly,)
+class QuestionDetailView(APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+    def get_object(self, pk):
+        try:
+            return Question.objects.get(pk=pk)
+        except Question.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        question = self.get_object(pk)
+        serializer = QuestionSerializer(question)
+        return Response(serializer.data)
 
 
 class AskQuestionView(generics.CreateAPIView):

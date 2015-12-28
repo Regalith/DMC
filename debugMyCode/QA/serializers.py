@@ -7,5 +7,5 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ('id', 'title', 'detail_text', 'views', 'bounty', 'is_answered', 'language', 'program', 'framework', 'owner')
+        fields = ('id', 'title', 'detail_text', 'views', 'bounty', 'answers', 'is_answered', 'language', 'program', 'framework', 'owner')
 
