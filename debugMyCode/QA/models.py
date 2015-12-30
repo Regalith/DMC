@@ -25,6 +25,14 @@ class Framework(models.Model):
         return self.title
 
 
+class Filter(models.Model):
+    language = models.ForeignKey(Language, blank=True, null=True, related_name='filter_language')
+    program = models.ForeignKey(Program, blank=True, null=True, related_name='filter_program')
+    framework = models.ForeignKey(Framework, blank=True, null=True, related_name='filter_framework')
+    min_bounty = models.FloatField(default=0)
+    is_answered = models.BooleanField(default=0)
+
+
 class TimeStampedModel(models.Model):
     """
     An abstract base class model that provides self-updating

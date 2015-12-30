@@ -5,6 +5,7 @@ var watchify = require('watchify');
 var reactify = require('reactify');
 var concat = require('gulp-concat');
 var buffer = require('vinyl-buffer');
+var babelify = require('babelify');
 
 var path = {
   ENTRY: './js/MainApp.jsx',

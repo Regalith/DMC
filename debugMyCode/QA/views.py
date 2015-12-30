@@ -1,18 +1,17 @@
 from django.shortcuts import render, Http404
 from .models import Question, Language, Framework, Program
-from .serializers import QuestionSerializer
+from .serializers import QuestionSerializer, FilterSerializer
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework import permissions
-from .permissions import IsOwnerOrReadOnly
 from rest_framework.permissions import AllowAny
-import sys
+
 
 class AllQuestionsView(generics.ListAPIView):
     queryset = Question.objects.all().order_by('-modified')
     serializer_class = QuestionSerializer
+
     permission_classes = (AllowAny,)
 
     language = None
@@ -27,8 +26,18 @@ class AllQuestionsView(generics.ListAPIView):
         return self.list(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        serializer = FilterSerializer(data=request.POST);
+
+        if serializer.is_valid():
+            self.language = serializer.object.language;
+            self.program = serializer.object.program;
+            self.framework = serializer.object.framework;
+            self.minBounty = serializer.object.min_bounty;
+            self.answered = serializer.object.is_answered;
 
         self.queryset = Question.objects.all().order_by('-modified')
+
+        self.queryset = self.custom_filter(self.queryset)
 
         return self.list(request, *args, **kwargs)
 

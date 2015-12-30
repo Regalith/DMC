@@ -9,3 +9,9 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = ('id', 'title', 'detail_text', 'views', 'bounty', 'answers', 'is_answered', 'language', 'program', 'framework', 'owner')
 
+
+class FilterSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Question
+        fields = ('language', 'program', 'framework', 'min_bounty', 'is_answered')

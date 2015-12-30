@@ -1,29 +1,45 @@
 var React = require('react');
 var QuestionListComponent = require('./questionList.jsx');
+var Pagination = require('react-bootstrap').Pagination;
 
 var QuestionPanelComponent = React.createClass({
 
     getInitialState :function(){
-      return {results: []};
+      return {
+          activePage: 1,
+      };
     },
-    componentDidMount(){
-         $.ajax({
-              url: this.props.url,
-              dataType: 'json',
-              cache: false,
-              success: function(data) {
-                 this.setState({results: data.results});
-              }.bind(this),
-              error: function(xhr, status, err) {
-                 console.error(this.props.url, status, err.toString());
-              }.bind(this)
+
+    handleSelect(event, selectedEvent) {
+        //Reload questions with diffrent page number
+        this.props.loadQuestionsFromServer(selectedEvent.eventKey);
+        //Set state to refresh dom and set active page
+        this.setState({
+            activePage :selectedEvent.eventKey
         });
+
+
+    },
+
+    componentDidMount(){
+        this.props.loadQuestionsFromServer(1);
     },
     render: function()
     {
         return(
           <div>
-                <QuestionListComponent data={this.state.results} />
+              <QuestionListComponent data={this.props.results} />
+              <Pagination
+                    prev
+                    next
+                    first
+                    last
+                    ellipsis
+                    items={this.props.numPages}
+                    maxButtons={5}
+                    activePage={this.state.activePage}
+                    onSelect={this.handleSelect}
+              />
           </div>
         );
     }

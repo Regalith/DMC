@@ -1,0 +1,26 @@
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+.modal-header, .modal-body {
+    color: #1E1E20;
+}
+
+a {
+    cursor: pointer;
+}
+
+.fade {
+   opacity: 0;
+   -webkit-transition: opacity 0.1s linear;
+      -moz-transition: opacity 0.1s linear;
+       -ms-transition: opacity 0.1s linear;
+        -o-transition: opacity 0.1s linear;
+           transition: opacity 0.1s linear;
+}
+
+.navbar-default .navbar-text{
+    color: #D9CB9E;
+}

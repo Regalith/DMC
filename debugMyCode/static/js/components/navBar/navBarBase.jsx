@@ -6,37 +6,41 @@ var Nav = require('react-bootstrap').Nav;
 var NavDropdown = require('react-bootstrap').NavDropdown;
 var Link = require('react-router').Link;
 var Image = require('react-bootstrap').Image;
+var LoginComponent = require('./login.jsx');
 
 
+var NavBarComponent = React.createClass({
 
-module.exports  =NavBarComponent = React.createClass({
+
     render: function(){
         return (
             <div>
                <Navbar bsStyle="default" >
                     <Navbar.Header>
-                            <Link to="/"><img src="../static/build/img/Logo.png" /></Link>
-                        <Navbar.Toggle />
+                            <Link to="/"><Image src="../static/build/img/Logo.png" responsive /></Link>
                     </Navbar.Header>
                     <Navbar.Collapse>
                           <Nav>
-                            <NavItem eventKey={1} href="#"> Link</NavItem>
-                            <NavItem eventKey={2} href="#">Link</NavItem>
-                            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                                  <MenuItem eventKey={3.1} href="boop">Action </MenuItem>
-                                  <MenuItem eventKey={3.2}>Another action</MenuItem>
-                                  <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                                  <MenuItem divider />
-                                  <MenuItem eventKey={3.3}>Separated link</MenuItem>
-                            </NavDropdown>
+                                <Navbar.Text> Debug My Code </Navbar.Text>
+
+                                <NavDropdown eventKey={1} title="Navigation" id="basic-nav-dropdown">
+                                    <MenuItem eventKey={1.1} href="boop">Action </MenuItem>
+                                    <MenuItem eventKey={1.2}>Another action</MenuItem>
+                                    <MenuItem eventKey={1.3}>Something else here</MenuItem>
+                                    <MenuItem divider />
+                                    <MenuItem eventKey={1.3}>Separated link</MenuItem>
+                                </NavDropdown>
                           </Nav>
                           <Nav pullRight>
-                                <NavItem eventKey={2} href="#">Login</NavItem>
+                                <LoginComponent />
                           </Nav>
                         </Navbar.Collapse>
                   </Navbar>
+
                  {this.props.children}
             </div>
          )
     }
 });
+
+module.exports = NavBarComponent;

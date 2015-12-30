@@ -24,8 +24,8 @@ var QuestionDetailsComponent = React.createClass({
     {
         return(
           <div className="container">
-              {this.state.title}
-              {this.state.detail_text}
+              <p>{this.state.question.title}</p>
+              <p>{this.state.question.detail_text}</p>
           </div>
         );
     }

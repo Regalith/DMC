@@ -4,23 +4,35 @@ var Input = require('react-bootstrap').Input;
 var ButtonInput = require('react-bootstrap').ButtonInput;
 var FilterPanelComponent= React.createClass({
 
-    /*getInitialState : function(){
-        return {question : []};
+    getInitialState : function(){
+        return {
+            program : null,
+            framework :null,
+            language : null,
+            minBounty : null,
+            isAnswered : null,
+
+        };
     },
 
-    componentDidMount(){
-         $.ajax({
-              url: "/api/QA/getQuestion/" + this.props.params.id,
-              dataType: 'json',
-              cache: false,
-              success: function(data) {
-                 this.setState({question: data});
-              }.bind(this),
-              error: function(xhr, status, err) {
-                 console.error('/api/QA/getQuestion/' + this.props.params.id, status, err.toString());
-              }.bind(this)
-        });
-    },*/
+    handleSubmit : function(e){
+        e.defaultPrevented();
+        console.log("Boop");
+        var program = this.state.program;
+        var framework = this.state.framework;
+        var language = this.state.language;
+        var minBounty = this.state.minBounty;
+        var isAnswered = this.state.isAnswered;
+
+        this.props.handleFilterSubmit({program: program, framework: framework, language: language, min_bounty: minBounty, is_answered: isAnswered});
+        this.setState({
+            program : null,
+            framework :null,
+            language : null,
+            minBounty : null,
+            isAnswered : null,
+        })
+    },
 
     render: function()
     {
@@ -28,11 +40,12 @@ var FilterPanelComponent= React.createClass({
           <div>
               <Well>
                     <h3>Filters</h3>
-                    <form>
-                        <Input bsSize='small' type="text" label="Keyword" placeholder="Enter Keywords" />
-                        <Input bsSize='small' type="text" label="Program" placeholder="Enter Program" />
-                        <Input bsSize='small' type="text" label="Framework" placeholder="Enter Framework" />
-                        <Input bsSize='small' type="text" label="Language" placeholder="Enter Language" />
+                    <form onSubmit={this.handleSubmit} >
+                        <Input bsSize='small' value={this.state.program} type="text" label="Program" placeholder="Enter Program" />
+                        <Input bsSize='small' value={this.state.framework} type="text" label="Framework" placeholder="Enter Framework" />
+                        <Input bsSize='small' value={this.state.language} type="text" label="Language" placeholder="Enter Language" />
+                        <Input bsSize='small' value={this.state.minBounty} type="text" addonBefore="$" addonAfter=".00" label="Minimum Bounty"/>
+                        <Input type="checkbox" value={this.state.isAnswered} label="Is Answered" />
                         <ButtonInput type="submit" value="Search" />
                     </form>
               </Well>

@@ -7,7 +7,8 @@ var Link = require('react-router').Link;
 var QuestionValues = require('./questionValues.jsx');
 
 var titleStyle = {
-    color: "#DC3522"
+    color: "#DC3522",
+    verticalAlign : top
 }
 
 var QuestionComponent = React.createClass({
@@ -17,17 +18,17 @@ var QuestionComponent = React.createClass({
            <div>
                <Grid>
                    <Row>
-                        <Col xs={4} sm={4} md={4} lg={4}>
+                        <Col xs={3} sm={3} md={3} lg={3}>
                             <Row>
-                                <QuestionValues label="Answers" value={this.props.data.answers} />
-                                <QuestionValues label="Views" value={this.props.data.views} />
-                                <QuestionValues label="Bounty" value={this.props.data.bounty} />
+                                <QuestionValues label="Answers" value={this.props.data.answers} color= "#D9CB9E"/>
+                                <QuestionValues label="Views" value={this.props.data.views} color="#D9CB9E" />
+                                <QuestionValues label="Bounty" value={this.props.data.bounty} color="#D9CB9E" />
                             </Row>
                         </Col>
 
-                        <Col xs={4} sm={4} md={4} lg={4}>
+                        <Col xs={9} sm={9} md={9} lg={9}>
                             <Row>
-                                <Col> <h3 style={titleStyle}><Link to={`/question/${this.props.data.id}`} className="text-info"><a>{this.props.data.title}</a></Link></h3> </Col>
+                                <Col> <h3 style={titleStyle}><Link to={`/question/${this.props.data.id}`} >{this.props.data.title}</Link></h3> </Col>
                             </Row>
                             <Row>
 
