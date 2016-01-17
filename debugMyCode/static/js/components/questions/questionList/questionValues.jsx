@@ -1,13 +1,15 @@
-var React = require('react');
+import React from 'react';
+
+//Bootstrap components
 var Well = require('react-bootstrap').Well;
 var Col = require('react-bootstrap').Col;
 
 
 
-var QuestionValues = React.createClass({
+class QuestionValues extends React.Component{
 
-    render : function() {
-        var bgColor = "#D9CB9E";
+    render() {
+        var bgColor = "#FFFFFF";
 
 
         if(this.props.value > 0)
@@ -32,6 +34,6 @@ var QuestionValues = React.createClass({
            </Col>
        );
    }
-});
+}
 
-module.exports = QuestionValues;
+export default QuestionValues;

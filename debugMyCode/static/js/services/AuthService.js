@@ -1,23 +1,29 @@
-var AppActions = require("../actions/AppActions.jsx");
+import UserAction from "../actions/UserAction";
 
 class AuthService {
+
     login(username, password)
     {
         $.ajax({
-          url: "api-token-auth/",
-          dataType: 'json',
-          type: 'POST',
-          data: {username,password},
-          success: function(response) {
+            url: "/api-token-auth/",
+            dataType: 'json',
+            type: 'POST',
+            data: {
+                username: username,
+                password: password
+            },
+            success: function(response) {
                 var jwt = response.token;
-                AppActions.loginUser(username,jwt);
-          }.bind(this),
-          error: function(xhr, status, err) {
-            console.error(this.props.url, status, err.toString());
-          }.bind(this)
+                UserAction.loginUser(username,jwt);
+                return true;
+            }.bind(this),
+            error: function(xhr, status, err) {
+                console.error(url, status, err.toString());
+                return false;
+            }.bind(this)
         });
     }
 
-};
+}
 
-module.exports = AuthService;
+export default new AuthService();

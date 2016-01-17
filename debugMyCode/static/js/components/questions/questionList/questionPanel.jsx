@@ -1,14 +1,18 @@
-var React = require('react');
-var QuestionListComponent = require('./questionList.jsx');
+import React from 'react';
+import QuestionListComponent from './questionList.jsx';
+
+//Bootstrap components
 var Pagination = require('react-bootstrap').Pagination;
 
-var QuestionPanelComponent = React.createClass({
+class QuestionPanelComponent extends React.Component{
 
-    getInitialState :function(){
-      return {
-          activePage: 1,
-      };
-    },
+    constructor(props) {
+        super(props);
+        this.state = {
+            activePage: 1,
+        };
+    }
+
 
     handleSelect(event, selectedEvent) {
         //Reload questions with diffrent page number
@@ -19,12 +23,12 @@ var QuestionPanelComponent = React.createClass({
         });
 
 
-    },
+    }
 
     componentDidMount(){
         this.props.loadQuestionsFromServer(1);
-    },
-    render: function()
+    }
+    render()
     {
         return(
           <div>
@@ -38,11 +42,11 @@ var QuestionPanelComponent = React.createClass({
                     items={this.props.numPages}
                     maxButtons={5}
                     activePage={this.state.activePage}
-                    onSelect={this.handleSelect}
+                    onSelect={this.handleSelect.bind(this)}
               />
           </div>
         );
     }
-});
+}
 
-module.exports = QuestionPanelComponent;
+export default QuestionPanelComponent;

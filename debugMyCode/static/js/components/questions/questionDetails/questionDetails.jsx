@@ -1,11 +1,13 @@
-var React = require('react');
+import React from 'react';
 
-var QuestionDetailsComponent = React.createClass({
+class QuestionDetailsComponent extends React.Component{
 
-    getInitialState : function(){
-        return {question : []};
-    },
-
+    constructor(props) {
+        super(props);
+        this.state = {
+           question : []
+        };
+    }
     componentDidMount(){
          $.ajax({
               url: "/api/QA/getQuestion/" + this.props.params.id,
@@ -18,17 +20,17 @@ var QuestionDetailsComponent = React.createClass({
                  console.error('/api/QA/getQuestion/' + this.props.params.id, status, err.toString());
               }.bind(this)
         });
-    },
+    }
 
-    render: function()
+    render()
     {
         return(
-          <div className="container">
+          <div>
               <p>{this.state.question.title}</p>
               <p>{this.state.question.detail_text}</p>
           </div>
         );
     }
-});
+}
 
-module.exports = QuestionDetailsComponent;
+export default QuestionDetailsComponent;

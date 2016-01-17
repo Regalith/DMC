@@ -1,15 +1,17 @@
-var React = require('react');
+import React from 'react';
+import QuestionComponent from './question.jsx';
+
+//Bootstrap components
 var ListGroup = require('react-bootstrap').ListGroup;
 var ListGroupItem = require('react-bootstrap').ListGroupItem;
-var QuestionComponent = require('./question.jsx');
 
-var QuestionListComponent = React.createClass({
+class QuestionListComponent extends React.Component{
 
-    propTypes: {
-        data: React.PropTypes.array.isRequired
-    },
+    constructor(props) {
+        super(props);
+    }
 
-    render: function(){
+    render(){
         var questionNodes = this.props.data.map(function(question) {
             return (
                 //<QuestionComponent title={question.title} />
@@ -25,6 +27,6 @@ var QuestionListComponent = React.createClass({
             </div>
          );
     }
-});
+}
 
-module.exports = QuestionListComponent;
+export default QuestionListComponent;

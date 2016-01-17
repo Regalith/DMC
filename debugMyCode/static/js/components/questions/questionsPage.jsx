@@ -1,20 +1,25 @@
- var React = require('react');
-var QuestionPanelComponent = require('./questionList/questionPanel.jsx');
-var FilterPanelComponent = require('./filters/filterPanel.jsx');
+import React from 'react';
+import QuestionPanelComponent from './questionList/questionPanel.jsx';
+import FilterPanelComponent from './filters/filterPanel.jsx';
+
+//Bootstrap components
 var Grid = require('react-bootstrap').Grid
 var Row = require('react-bootstrap').Row;
 var Col = require('react-bootstrap').Col;
+class QuestionPageComponent extends React.Component{
 
-var QuestionPageComponent = React.createClass({
-    getInitialState :function(){
-      return {
-          results: [],
-          numPages : 0,
-          activePage: 1,
-      };
-    },
+     constructor(props) {
+         super(props);
+         this.state = {
+             results: [],
+             numPages : 0,
+             activePage: 1,
+        };
+    }
 
-    loadQuestionsFromServer: function(pageNum){
+
+    loadQuestionsFromServer(pageNum)
+    {
         var pageUrl = "/api/QA/getAllQuestions/" + '?page=' + pageNum;
         $.ajax({
               url: pageUrl,
@@ -31,47 +36,45 @@ var QuestionPageComponent = React.createClass({
               }.bind(this)
         });
 
-    },
+    }
 
-    handleFilterSubmit : function(filter){
+    handleFilterSubmit (filter){
         $.ajax({
           url: "/api/QA/getAllQuestions/",
           dataType: 'json',
           type: 'POST',
           data: filter,
           success: function(data) {
-            this.setState({
+            this.state = {
                 results: data.results,
                 numPages: Math.ceil(data.count / 15),
-            });
+            };
           }.bind(this),
           error: function(xhr, status, err) {
             console.error(this.props.url, status, err.toString());
           }.bind(this)
         });
-    },
+    }
 
-    render: function(){
+    render(){
         return (
 
-            <div className = "container">
-                <Grid>
-                    <Row>
-                        <Col s={3} sm={3} md={3} lg={3}>
-                            <FilterPanelComponent handleFilterSubmit={this.handleFilterSubmit} />
-                        </Col>
-                        <Col s={9} sm={9} md={9} lg={9}>
-                            <QuestionPanelComponent
-                                results={this.state.results}
-                                numPages={this.state.numPages}
-                                loadQuestionsFromServer={this.loadQuestionsFromServer}
-                            />
-                        </Col>
-                    </Row>
-                </Grid>
+            <div>
+                <Row>
+                    <Col s={2} sm={2} md={2} lg={2}>
+                        <FilterPanelComponent handleFilterSubmit={this.handleFilterSubmit.bind(this)} />
+                    </Col>
+                    <Col s={6} sm={6} md={6} lg={6}>
+                        <QuestionPanelComponent
+                            results={this.state.results}
+                            numPages={this.state.numPages}
+                            loadQuestionsFromServer={this.loadQuestionsFromServer.bind(this)}
+                        />
+                    </Col>
+                </Row>
              </div>
          )
     }
-});
+}
 
-module.exports = QuestionPageComponent;
+export default QuestionPageComponent;

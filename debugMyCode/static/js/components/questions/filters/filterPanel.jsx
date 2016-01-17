@@ -1,21 +1,26 @@
-var React = require('react');
+import  React from 'react';
+
+//Bootstrap components
 var Well = require('react-bootstrap').Well;
 var Input = require('react-bootstrap').Input;
 var ButtonInput = require('react-bootstrap').ButtonInput;
-var FilterPanelComponent= React.createClass({
 
-    getInitialState : function(){
-        return {
-            program : null,
-            framework :null,
-            language : null,
-            minBounty : null,
-            isAnswered : null,
+
+class FilterPanelComponent extends React.Component{
+
+   constructor(props){
+        super(props);
+        this.state = {
+            program : '',
+            framework :'',
+            language : '',
+            minBounty : 0,
+            isAnswered : false,
 
         };
-    },
+    }
 
-    handleSubmit : function(e){
+    handleSubmit(e){
         e.defaultPrevented();
         console.log("Boop");
         var program = this.state.program;
@@ -26,15 +31,15 @@ var FilterPanelComponent= React.createClass({
 
         this.props.handleFilterSubmit({program: program, framework: framework, language: language, min_bounty: minBounty, is_answered: isAnswered});
         this.setState({
-            program : null,
-            framework :null,
-            language : null,
-            minBounty : null,
-            isAnswered : null,
-        })
-    },
+            program : '',
+            framework :'',
+            language : '',
+            minBounty : 0,
+            isAnswered : false,
+        });
+    }
 
-    render: function()
+    render()
     {
         return(
           <div>
@@ -52,6 +57,6 @@ var FilterPanelComponent= React.createClass({
           </div>
         );
     }
-});
+};
 
-module.exports = FilterPanelComponent;
+export default FilterPanelComponent;

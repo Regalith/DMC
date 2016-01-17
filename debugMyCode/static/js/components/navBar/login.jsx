@@ -1,62 +1,82 @@
-var React = require('react');
+import React from 'react';
+import AuthService from '../../services/AuthService.js';
+
+//React bootstrap classes
 var Modal = require('react-bootstrap').Modal;
 var Button = require('react-bootstrap').Button;
 var Input = require('react-bootstrap').Input;
-var ButtonInput = require('react-bootstrap').ButtonInput;
-var AuthService = require('../../services/AuthService.js');
 
 
-var LoginComponent = React.createClass({
+class LoginComponent extends React.Component{
 
-    getInitialState() {
-        return {
+
+    constructor(props){
+        super(props);
+
+        this.state = {
             showModal: false,
-            username : null,
-            password : null,
-        };
-    },
+            username : '',
+            password : '',
+        }
+    }
 
     close() {
         this.setState({showModal: false});
-    },
+    }
 
     open() {
         this.setState({showModal: true});
-    },
+    }
 
-    login : function(e) {
-      e.preventDefault();
+    handleUsernameChange(e)
+    {
+        e.preventDefault();
+        this.setState(
+            {
+                username : e.target.value,
+            });
+    }
+    handlePasswordChange(e)
+    {
+        e.preventDefault();
+         this.setState(
+            {
+                password : e.target.value,
+            });
+    }
 
+    login(e) {
+        e.preventDefault();
+        var success = AuthService.login(this.state.username, this.state.password);
+        this.setState({showModal: false});
+    }
 
-
-    },
-
-    render : function() {
+    render(){
         return(
             <div>
-                <Button bsSize="large" bsStyle="info" onClick={this.open}>
-                    Login
+                <Button bsSize="large" bsStyle="info" onClick={this.open.bind(this)}>
+                     <h2>Login</h2>
                 </Button>
 
-                <Modal show={this.state.showModal} onHide={this.close} bsSize="small" S>
+                <Modal show={this.state.showModal} onHide={this.close.bind(this)} bsSize="small" S>
                     <Modal.Header closeButton>
                         <Modal.Title>Login</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <form>
-                            <Input bsSize='small' type="text" label="Username" placeholder="username" />
-                            <Input bsSize='small' type="text" label="Password" placeholder="password" />
+                            <Input value={this.state.username} onChange={this.handleUsernameChange.bind(this)} bsSize='small' type="text" label="Username" placeholder="username" />
+                            <Input value={this.state.password} onChange={this.handlePasswordChange.bind(this)} bsSize='small' type="text" label="Password" placeholder="password" />
                         </form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
-                        <Button onClick={this.close}>Login</Button>
+                        <Button onClick={this.close.bind(this)}>Close</Button>
+                        <Button onClick={this.login.bind(this)}>Login</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
         )
     }
-});
+}
 
-module.exports = LoginComponent;
+export default LoginComponent;
 
